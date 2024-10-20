@@ -3,3 +3,39 @@ create database SuccessAir;
 alter role Success with password "successair123";
 grant all privileges on database SuccessAir to Success;
 alter database SuccessAir owner to Success; 
+
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=success
+Group=www-data
+WorkingDirectory=/home/success/SuccessAir
+ExecStart=/home/success/SuccessAir/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/success/SuccessAir/SuccessAir.sock SuccessAir.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+
+server {
+    listen 80;
+    server_name 134.209.21.134;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /staticfiles/ {
+        root /home/success/SuccessAir;
+    }
+        location /media/ {
+        root /home/success/SuccessAir;
+    }
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/success/SuccessAir/SuccessAir.sock;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/SuccessAir /etc/nginx/sites-enabled
+
+chmod o+rx /home/success/

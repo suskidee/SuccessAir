@@ -9,7 +9,7 @@ django-filter==24.2
 django-oauth-toolkit==3.0.1
 django-rest-framework-social-oauth2==1.2.0
 django-templated-mail==1.1.1
-djangorestframework<=3.15.2
+djangorestframework==3.15.2
 djangorestframework-simplejwt==5.3.1
 djoser==2.2.2
 drf-nested-routers==0.93.5
@@ -17,10 +17,11 @@ drf-yasg==1.21.7
 idna==3.7
 inflection==0.5.1
 jwcrypto==1.5.6
-psycopg2-binary<=2.9.9
 oauthlib==3.2.2
 packaging==24.0
 pillow==10.3.0
+psycopg2==2.9.10
+psycopg2-binary==2.9.9
 pycparser==2.22
 PyJWT==2.8.0
 python-dotenv==1.0.1
