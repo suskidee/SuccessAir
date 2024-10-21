@@ -1,6 +1,6 @@
 create user Success;
 create database SuccessAir;
-alter role Success with password "successair123";
+    alter role Success with password "successair123";
 grant all privileges on database SuccessAir to Success;
 alter database SuccessAir owner to Success; 
 
